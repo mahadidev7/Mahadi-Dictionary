@@ -9,7 +9,7 @@ export default function Home() {
 
   const handelDrawerFun = (text: string) => {
     setSelectWord(text);
-    setDrowar(!drowar);
+    setDrowar(true);
   };
 
   const handelSearchFun = () => {
