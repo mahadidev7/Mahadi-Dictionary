@@ -1,9 +1,22 @@
 "use client";
 import { useState } from "react";
 import { initialThirtyDictionary } from "../app/data/dictionary";
+import { initialFiftyDictionary } from "../app/data/fDictionary";
+
+const data = [
+  {
+    name: "3000",
+    data: initialThirtyDictionary,
+  },
+  {
+    name: "5000",
+    data: initialFiftyDictionary,
+  },
+];
 
 export default function Home() {
   const [drowar, setDrowar] = useState(false);
+  const [SelectDictionary, setSelectDictionary] = useState([]);
   const [selectWord, setSelectWord] = useState("");
   const [searchWord, setSearchWord] = useState("");
 
@@ -23,12 +36,28 @@ export default function Home() {
     window.open(url, "_blank", "width=500,height=700");
   };
 
+  const handlerSelectDictionary = (event) => {
+    setSelectDictionary(event?.split(" "));
+  };
+
   return (
     <div className="relative h-full w-full bg-[#044150]">
+      <div className="p-2 text-center">
+        <select className="bg-black p-2 px-4 rounded-md" onChange={(e) => handlerSelectDictionary(e.target.value)}>
+          <option value=''>
+              select dictionary
+            </option>
+          {data?.map((i, key) => (
+            <option value={i.data} key={key}>
+              {i.name}
+            </option>
+          ))}
+        </select>
+      </div>
       <div className="flex gap-0">
         <div className="flex-1 h-screen overflow-y-scroll ">
           <div className="flex flex-wrap justify-start">
-            {initialThirtyDictionary?.split(" ")?.map((word, index) => (
+            {SelectDictionary?.map((word, index) => (
               <div key={index} className="">
                 <p
                   onClick={() => handelDrawerFun(word)}
@@ -116,7 +145,9 @@ export default function Home() {
 
                   <button
                     className="pointer p-3 bg-[#470561ea] rounded-sm"
-                    onClick={() =>{setDrowar(!drowar);}}
+                    onClick={() => {
+                      setDrowar(!drowar);
+                    }}
                   >
                     Close
                   </button>
