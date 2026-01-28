@@ -49,7 +49,7 @@ export default function Home() {
               <div key={index} className="">
                 <p
                   onClick={() => handelDrawerFun(word)}
-                  className={`text-white text-center text-[20px] mx-5 my-7 font-medium ${word === selectWord ? "text-[#ffd700]" : ""} pointer`}
+                  className={` text-center text-[20px] mx-5 my-7 font-medium ${word === selectWord ? "text-[#ffd700]" : "text-white"} pointer`}
                 >
                   {word},
                 </p>
