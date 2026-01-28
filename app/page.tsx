@@ -16,7 +16,7 @@ const data = [
 
 export default function Home() {
   const [drowar, setDrowar] = useState(false);
-  const [SelectDictionary, setSelectDictionary] = useState([]);
+  const [SelectDictionary, setSelectDictionary] = useState<string[]>([]);
   const [selectWord, setSelectWord] = useState("");
   const [searchWord, setSearchWord] = useState("");
 
@@ -36,7 +36,7 @@ export default function Home() {
     window.open(url, "_blank", "width=500,height=700");
   };
 
-  const handlerSelectDictionary = (event) => {
+  const handlerSelectDictionary = (event: string) => {
     setSelectDictionary(event?.split(" "));
   };
 
@@ -44,7 +44,7 @@ export default function Home() {
     <div className="relative h-full w-full bg-[#044150]">
       <div className="p-2 text-center">
         <select className="bg-black p-2 px-4 rounded-md" onChange={(e) => handlerSelectDictionary(e.target.value)}>
-          <option value=''>
+          <option value=' '>
               select dictionary
             </option>
           {data?.map((i, key) => (
