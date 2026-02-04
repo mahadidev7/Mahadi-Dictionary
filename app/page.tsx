@@ -42,24 +42,7 @@ export default function Home() {
 
   return (
     <div className="relative h-full w-full bg-[#044150]">
-      <div className="">
-        <div className="overflow-y-scroll ">
-          <div className="">
-            {SelectDictionary?.map((word, index) => (
-              <div key={index} className="78">
-                <p
-                  onClick={() => handelDrawerFun(word)}
-                  className={`text-center text-[28px] border-bottom mx-5 my-7 ${word === selectWord ? "text-[#ffd700]" : "text-white"} pointer`}
-                >
-                  {word},
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="d">
-          <div className="p-2 text-center">
+       <div className="p-2 ">
             <select
               className="bg-black p-2 px-4 rounded-md"
               onChange={(e) => handlerSelectDictionary(e.target.value)}
@@ -72,11 +55,29 @@ export default function Home() {
               ))}
             </select>
           </div>
+      <div className="flex gap-0">
+        <div className="flex-1">
+          <div className="">
+            {SelectDictionary?.map((word, index) => (
+              <div key={index} className="">
+                <p
+                  onClick={() => handelDrawerFun(word)}
+                  className={`border-b tracking-wide border-[#032633] text-[40px] mx-5 my-7 font-medium ${word === selectWord ? "text-[#ffd700]" : "text-white"} pointer`}
+                >
+                  {word},
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="d">
+         
           {drowar && (
-            <div className="">
-              <div className="bg-[#032633] h-full p-3">
+            <div className="fixed top-2 right-2 z-10">
+              <div className="bg-[#032633] h-full p-3 rounded-lg">
                 <div className="flex flex-col gap-2 justify-between items-center">
-                  <h1 className=" capitalize text-white">{selectWord}</h1>
+                  <h1 className="text-xl capitalize text-white">{selectWord}</h1>
                   <div className="flex gap-2 w-full">
                     <input
                       type="text"
@@ -86,10 +87,10 @@ export default function Home() {
                       onChange={handleChange}
                     />
                     <button
-                      className="pointer text-white px-3 bg-[#02293bea]"
+                      className="pointer border rounded-lg text-white px-3 bg-[#02293bea]"
                       onClick={() => handelSearchFun()}
                     >
-                      Search
+                      🔍
                     </button>
                   </div>
                 </div>
