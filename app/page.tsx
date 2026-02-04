@@ -43,7 +43,7 @@ export default function Home() {
 
   const handlerSelectDictionary = (event: string) => {
     const makeArray = event?.split(" ")
-     const sortArrayMake = makeArray.slice().sort(function(a, b){
+     const sortArrayMake = makeArray.filter(Boolean).slice().sort(function(a, b){
             if(a.toLowerCase() < b.toLowerCase()) { return -1; }
             if(a.toLowerCase() > b.toLowerCase()) { return 1; }
             return 0;
@@ -92,7 +92,7 @@ export default function Home() {
                   onClick={() => handelDrawerFun(word)}
                   className={`border-b tracking-wide border-[#032633] text-[40px] mx-5 my-7 font-medium ${word === selectWord ? "text-[#ffd700]" : "text-white"} pointer`}
                 >
-                  {word},
+                  {"(" + index  + ") " +word},
                 </p>
               </div>
             ))}
