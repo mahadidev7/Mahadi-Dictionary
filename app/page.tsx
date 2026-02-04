@@ -42,14 +42,14 @@ export default function Home() {
 
   return (
     <div className="relative h-full w-full bg-[#044150]">
-      <div className="flex gap-0">
-        <div className="flex-1 h-screen overflow-y-scroll ">
-          <div className="flex flex-wrap justify-start">
+      <div className="">
+        <div className="overflow-y-scroll ">
+          <div className="">
             {SelectDictionary?.map((word, index) => (
-              <div key={index} className="">
+              <div key={index} className="78">
                 <p
                   onClick={() => handelDrawerFun(word)}
-                  className={` text-center text-[20px] mx-5 my-7 font-medium ${word === selectWord ? "text-[#ffd700]" : "text-white"} pointer`}
+                  className={`text-center text-[28px] border-bottom mx-5 my-7 ${word === selectWord ? "text-[#ffd700]" : "text-white"} pointer`}
                 >
                   {word},
                 </p>
@@ -76,7 +76,7 @@ export default function Home() {
             <div className="">
               <div className="bg-[#032633] h-full p-3">
                 <div className="flex flex-col gap-2 justify-between items-center">
-                  <h1 className="text-xl capitalize text-white">{selectWord}</h1>
+                  <h1 className=" capitalize text-white">{selectWord}</h1>
                   <div className="flex gap-2 w-full">
                     <input
                       type="text"
