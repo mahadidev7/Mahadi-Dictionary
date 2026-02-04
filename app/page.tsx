@@ -12,11 +12,16 @@ const data = [
     name: "5000",
     data: initialFiftyDictionary,
   },
+  {
+    name: "3000 + 5000",
+    data: [initialThirtyDictionary, initialFiftyDictionary],
+  },
 ];
 
 export default function Home() {
   const [drowar, setDrowar] = useState(false);
   const [SelectDictionary, setSelectDictionary] = useState<string[]>([]);
+  const [loadedProducts, setLoadedProducts] = useState<string[]>([]);
   const [selectWord, setSelectWord] = useState("");
   const [searchWord, setSearchWord] = useState("");
 
@@ -37,24 +42,47 @@ export default function Home() {
   };
 
   const handlerSelectDictionary = (event: string) => {
-    setSelectDictionary(event?.split(" "));
+    const makeArray = event?.split(" ")
+     const sortArrayMake = makeArray.slice().sort(function(a, b){
+            if(a.toLowerCase() < b.toLowerCase()) { return -1; }
+            if(a.toLowerCase() > b.toLowerCase()) { return 1; }
+            return 0;
+        });
+    setSelectDictionary(sortArrayMake);
+
+    console.log(sortArrayMake);
   };
+
+  //  const createPagination = (items: string[], limet = 8, offset = 0)=>{
+  //     const newArray: string[] = [];
+  //     items.forEach((element: string, index: number) => {
+  //       if(index >= offset && index < limet + offset){
+  //         newArray.push(element)
+  //       }
+  //     });
+  //     return newArray ;
+  // }
+
+  //  const newProducts = createPagination(SelectDictionary, 100, loadedProducts.length);
+    // setLoadedProducts([...loadedProducts, ...newProducts])
 
   return (
     <div className="relative h-full w-full bg-[#044150]">
-       <div className="p-2 ">
-            <select
-              className="bg-black p-2 px-4 rounded-md"
-              onChange={(e) => handlerSelectDictionary(e.target.value)}
-            >
-              <option value=" ">select dictionary</option>
-              {data?.map((i, key) => (
-                <option value={i.data} key={key}>
-                  {i.name}
-                </option>
-              ))}
-            </select>
-          </div>
+      <div className="p-2 flex">
+        <select
+          className="bg-black p-2 px-4 rounded-md"
+          onChange={(e) => handlerSelectDictionary(e.target.value)}
+        >
+          <option value=" ">select dictionary</option>
+          {data?.map((i, key) => (
+            <option value={i.data} key={key}>
+              {i.name}
+            </option>
+          ))}
+        </select>
+        <div className="ml-2"><p>{SelectDictionary?.length}</p></div>
+        
+      </div>
       <div className="flex gap-0">
         <div className="flex-1">
           <div className="">
@@ -72,12 +100,13 @@ export default function Home() {
         </div>
 
         <div className="d">
-         
           {drowar && (
             <div className="fixed top-2 right-2 z-10">
               <div className="bg-[#032633] h-full p-3 rounded-lg">
                 <div className="flex flex-col gap-2 justify-between items-center">
-                  <h1 className="text-xl capitalize text-white">{selectWord}</h1>
+                  <h1 className="text-xl capitalize text-white">
+                    {selectWord}
+                  </h1>
                   <div className="flex gap-2 w-full">
                     <input
                       type="text"
