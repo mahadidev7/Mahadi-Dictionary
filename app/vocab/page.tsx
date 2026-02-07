@@ -43,15 +43,20 @@ export default function vocab() {
   };
 
   const handlerSelectDictionary = (event: string) => {
-    const makeArray = event?.split(" ")
-     const sortArrayMake = makeArray.filter(Boolean).slice().sort(function(a, b){
-            if(a.toLowerCase() < b.toLowerCase()) { return -1; }
-            if(a.toLowerCase() > b.toLowerCase()) { return 1; }
-            return 0;
-        });
-    setSelectDictionary(sortArrayMake);
-
-    console.log(sortArrayMake);
+    const makeArray = event?.split(" ");
+    const sortArrayMake = makeArray
+      .filter(Boolean)
+      .slice()
+      .sort(function (a, b) {
+        if (a.toLowerCase() < b.toLowerCase()) {
+          return -1;
+        }
+        if (a.toLowerCase() > b.toLowerCase()) {
+          return 1;
+        }
+        return 0;
+      });
+    setSelectDictionary([...new Set(sortArrayMake)]);
   };
 
   //  const createPagination = (items: string[], limet = 8, offset = 0)=>{
@@ -65,7 +70,7 @@ export default function vocab() {
   // }
 
   //  const newProducts = createPagination(SelectDictionary, 100, loadedProducts.length);
-    // setLoadedProducts([...loadedProducts, ...newProducts])
+  // setLoadedProducts([...loadedProducts, ...newProducts])
 
   return (
     <div className="relative h-full w-full bg-[#044150]">
@@ -81,8 +86,9 @@ export default function vocab() {
             </option>
           ))}
         </select>
-        <div className="ml-2"><p>{SelectDictionary?.length}</p></div>
-        
+        <div className="ml-2">
+          <p>{SelectDictionary?.length}</p>
+        </div>
       </div>
       <div className="flex gap-0">
         <div className="flex-1">
@@ -93,7 +99,7 @@ export default function vocab() {
                   onClick={() => handelDrawerFun(word)}
                   className={`border-b tracking-wide border-[#032633] text-[40px] mx-5 my-7 font-medium ${word === selectWord ? "text-[#ffd700]" : "text-white"} pointer`}
                 >
-                  {"(" + index  + ") " +word},
+                  {"(" + index + ") " + word},
                 </p>
               </div>
             ))}
